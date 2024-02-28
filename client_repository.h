@@ -13,8 +13,8 @@ struct ClientRepository {
     void addClient(Client &client);
     vector<Transaction> getTransactions(const unsigned clientId);
     Client& getClient(unsigned clientId);
-    vector<Client> clients;
-    vector<Transaction> transactions;
+    vector<Client> clients = {};
+    vector<Transaction> transactions = {};
 };
 
 // class ClientNotFoundException: public std::logic_error {
