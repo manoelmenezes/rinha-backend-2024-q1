@@ -1,17 +1,17 @@
 #include "client.h"
 #include "transaction.h"
 
-void Client::credit(unsigned value)
+void Client::credit(signed value)
 {
     this->balance += value;
 }
 
-void Client::debit(unsigned value)
+void Client::debit(signed value)
 {
     signed newBalance = this->balance - value;
     if (newBalance < -this->limit) 
     {
-        throw new InsufficientBalanceException(newBalance);
+        throw "new InsufficientBalanceException(newBalance)";
     }
     this->balance = newBalance;
 }

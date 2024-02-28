@@ -1,4 +1,6 @@
 #include "client_repository.h"
+#include "client.h"
+#include "transaction.h"
 #include <vector>
 
 using std::vector;
@@ -15,9 +17,9 @@ void ClientRepository::updateClient(const Client &client)
     client_tmp.limit = client.limit;
 }
 
-vector<Transaction&> ClientRepository::getTransactions(const unsigned clientId)
+vector<Transaction> ClientRepository::getTransactions(const unsigned clientId)
 {
-    vector<Transaction&> result;
+    vector<Transaction> result;
     for (unsigned i = 0; i < this->transactions.size(); i++) 
     {
         if (this->transactions[i].clientId == clientId) 
@@ -25,7 +27,7 @@ vector<Transaction&> ClientRepository::getTransactions(const unsigned clientId)
             result.push_back(this->transactions[i]);
         }
     }
-    return std::move(result);
+    return result;
 }
 
 void ClientRepository::addClient(Client &client)
@@ -42,5 +44,5 @@ Client& ClientRepository::getClient(unsigned clientId)
             return this->clients[i];
         }
     }
-    throw new ClientNotFoundException(clientId);
+    throw "new ClientNotFoundException(clientId)";
 }

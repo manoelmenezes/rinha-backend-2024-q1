@@ -10,10 +10,8 @@ using std::vector;
 
 struct ClientService {
     void executeTransaction(Transaction& transaction, Client& client);
-    vector<Transaction&> getTransactions(unsigned clientId);
-    ClientRepository clientRepository = ClientRepository{
-
-    };
+    vector<Transaction> getTransactions(unsigned clientId);
+    ClientRepository clientRepository;
 };
 
 #endif

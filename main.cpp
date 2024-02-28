@@ -21,7 +21,7 @@ int main() {
     // cout << "Transaction value: " << transaction.value << endl;
 
     ClientService clientService;
-    clientService.clientRepository = ClientRepository{};
+    // clientService.clientRepository = ClientRepository{};
     clientService.executeTransaction(transaction, client);
 
     cout << "Client ID: " << client.clientId << endl;

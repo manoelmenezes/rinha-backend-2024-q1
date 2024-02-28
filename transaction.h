@@ -6,7 +6,7 @@
 struct Transaction {
     unsigned clientId = 0;
     char type = ' ';
-    unsigned value = 0;
+    signed value = 0;
     std::string description = "";
 };
 
