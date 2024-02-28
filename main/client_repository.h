@@ -17,11 +17,11 @@ struct ClientRepository {
     vector<Transaction> transactions = {};
 };
 
-// class ClientNotFoundException: public std::logic_error {
-//     public:
-//     ClientNotFoundException(const unsigned clientId):
-//             std::logic_error("Client not found"), clientId(clientId) { }
-//     const unsigned clientId;
-// };
+class ClientNotFoundException: public std::logic_error {
+    public:
+    ClientNotFoundException(const unsigned clientId):
+            std::logic_error("Client not found"), clientId(clientId) { }
+    const unsigned clientId;
+};
 
 #endif

@@ -44,5 +44,5 @@ Client& ClientRepository::getClient(unsigned clientId)
             return this->clients[i];
         }
     }
-    throw "new ClientNotFoundException(clientId)";
+    throw new ClientNotFoundException(clientId);
 }

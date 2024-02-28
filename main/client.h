@@ -11,12 +11,12 @@ struct Client {
     void executeTransaction(Transaction& transaction, Client& client);
 };
 
-// class InsufficientBalanceException: public std::logic_error {
-//     public:
-//     InsufficientBalanceException(const signed balance):
-//             std::logic_error("Insufficient balance"), balance(balance) { }
-//     const signed balance;
-// };
+class InsufficientBalanceException: public std::logic_error {
+    public:
+    InsufficientBalanceException(const signed balance):
+            std::logic_error("Insufficient balance"), balance(balance) { }
+    const signed balance;
+};
 
 
 #endif

@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+#Bazel
+bazel-*
+
 # Compiled Object files
 *.slo
 *.lo

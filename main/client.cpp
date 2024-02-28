@@ -11,7 +11,7 @@ void Client::debit(signed value)
     signed newBalance = this->balance - value;
     if (newBalance < -this->limit) 
     {
-        throw "new InsufficientBalanceException(newBalance)";
+        throw new InsufficientBalanceException(newBalance);
     }
     this->balance = newBalance;
 }
