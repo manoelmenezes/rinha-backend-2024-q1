@@ -6,11 +6,10 @@
 using std::cout;
 using std::endl;
 
-void ClientService::executeTransaction(Transaction &transaction, Client &client)
+void ClientService::executeTransaction(Transaction &transaction, ExecuteTransactionResponse &response)
 {
-   cout << "Executing transaction:" << transaction.description << endl;
    Client& client_tmp = this->clientRepository.getClient(transaction.clientId);
-   client_tmp.executeTransaction(transaction, client);
+   client_tmp.executeTransaction(transaction, response);
    this->clientRepository.updateClient(client_tmp);
    this->clientRepository.executeTransaction(transaction);
 }

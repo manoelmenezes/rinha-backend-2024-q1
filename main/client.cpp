@@ -16,7 +16,7 @@ void Client::debit(signed value)
     this->balance = newBalance;
 }
 
-void Client::executeTransaction(Transaction &transaction, Client &client)
+void Client::executeTransaction(Transaction &transaction, ExecuteTransactionResponse &response)
 {
     if (transaction.type == 'c') 
     {
@@ -26,6 +26,6 @@ void Client::executeTransaction(Transaction &transaction, Client &client)
     {
         this->debit(transaction.value);
     }
-    client.balance = this->balance;
-    client.limit = this->limit;
+    response.balance = this->balance;
+    response.limit = this->limit;
 }

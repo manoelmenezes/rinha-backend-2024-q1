@@ -2,13 +2,18 @@
 #define CLIENT_H
 #include "transaction.h"
 
+struct ExecuteTransactionResponse {
+    signed limit = 0;
+    signed balance = 0;
+};
+
 struct Client {
     unsigned clientId = 0;
     signed limit = 0;
     signed balance = 0;
     void credit(signed value);
     void debit(signed value);
-    void executeTransaction(Transaction& transaction, Client& client);
+    void executeTransaction(Transaction& transaction, ExecuteTransactionResponse& response);
 };
 
 class InsufficientBalanceException: public std::logic_error {

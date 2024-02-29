@@ -9,7 +9,7 @@
 using std::vector;
 
 struct ClientService {
-    void executeTransaction(Transaction& transaction, Client& client);
+    void executeTransaction(Transaction& transaction, ExecuteTransactionResponse& response);
     vector<Transaction> getTransactions(unsigned clientId);
     ClientRepository clientRepository = ClientRepository {};
 };
