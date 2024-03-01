@@ -5,3 +5,7 @@ https://blog.envoyproxy.io/external-c-dependency-management-in-bazel-dd37477422f
 
 ## How to make external dependencies with bootstrap file to work with bazel
 https://stackoverflow.com/questions/60048460/bazel-for-packages-with-a-bootstrap-configure-make-build
+
+## Build Rest API in C++
+https://github.com/meltwater/served
+
