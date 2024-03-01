@@ -20,14 +20,6 @@ gcc_register_toolchain(
     target_arch = ARCHS.x86_64,
 )
 
-# http_archive(
-#     name = "served",
-#     url = "https://github.com/meltwater/served/archive/refs/tags/v1.6.0.zip",
-#     sha256 = "4853712d06183f3094d6b5a116be8ffea2c4a88cbf687dddd0cdc0ee496894ff",
-#     build_file = "//:third_party/served.BUILD",
-# )
-
-
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "served",
@@ -42,3 +34,32 @@ git_repository(
 )
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
+
+http_archive(
+    name = "rules_proto_grpc",
+    sha256 = "2a0860a336ae836b54671cbbe0710eec17c64ef70c4c5a88ccfd47ea6e3739bd",
+    strip_prefix = "rules_proto_grpc-4.6.0",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/releases/download/4.6.0/rules_proto_grpc-4.6.0.tar.gz"],
+    
+    )
+
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
+rules_proto_grpc_toolchains()
+rules_proto_grpc_repos()
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+rules_proto_dependencies()
+rules_proto_toolchains()
+
+load("@rules_proto_grpc//cpp:repositories.bzl", "cpp_repos")
+cpp_repos()
+
+git_repository(
+    name = "protobuf",
+    commit = "09745575a923640154bcf307fba8aedff47f240a",
+    remote = "https://github.com/protocolbuffers/protobuf",
+    shallow_since = "1558721209 -0700",
+)
+
+load("@protobuf//:protobuf_deps.bzl", "protobuf_deps")
+protobuf_deps()
