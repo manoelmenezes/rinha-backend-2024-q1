@@ -23,7 +23,6 @@ cc_binary(
     deps = [
         ":client-service",
         "@served//:served",
-        "//proto:cpp_rinha_proto",
-        "@protobuf//:json_util",
+        "@nlohmann_json//:json",
     ]
 )

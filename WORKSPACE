@@ -35,31 +35,8 @@ git_repository(
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
 
-http_archive(
-    name = "rules_proto_grpc",
-    sha256 = "2a0860a336ae836b54671cbbe0710eec17c64ef70c4c5a88ccfd47ea6e3739bd",
-    strip_prefix = "rules_proto_grpc-4.6.0",
-    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/releases/download/4.6.0/rules_proto_grpc-4.6.0.tar.gz"],
-    
-    )
-
-load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
-rules_proto_grpc_toolchains()
-rules_proto_grpc_repos()
-
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-rules_proto_dependencies()
-rules_proto_toolchains()
-
-load("@rules_proto_grpc//cpp:repositories.bzl", "cpp_repos")
-cpp_repos()
-
 git_repository(
-    name = "protobuf",
-    commit = "7a51eb5370905dec1943c5f1f6b4381fecb04116",
-    remote = "https://github.com/protocolbuffers/protobuf",
-    # shallow_since = "1558721209 -0700",
+    name = "nlohmann_json",
+    commit = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03",
+    remote = "https://github.com/nlohmann/json",
 )
-
-load("@protobuf//:protobuf_deps.bzl", "protobuf_deps")
-protobuf_deps()

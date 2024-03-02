@@ -3,8 +3,8 @@
 #include "client_service.h"
 #include "client_repository.h"
 #include <served/served.hpp>
-#include "proto/rinha.pb.h"
-// #include <protobuf/json_util.h>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 using std::cout;
 using std::endl;
@@ -44,19 +44,18 @@ using std::endl;
 
 
 int main(int argc, char const* argv[]) {
+	ClientService clientService;
 	// Create a multiplexer for handling requests
 	served::multiplexer mux;
 
-    rinha::Balance balance;
-
     // GET /clientes/[id]/extrato
-	mux.handle("/clients/{id}/extrato")
+	mux.handle("/clientes/{id}/extrato")
 		.get([](served::response & res, const served::request & req) {
 			res << "User: " << req.params["id"];
 		});
 
     // POST /clientes/[id]/transacoes
-    mux.handle("/clients/{id}/transacoes")
+    mux.handle("/clientes/{id}/transacoes")
         .post([](served::response & res, const served::request & req) {
 		if (req.header("Content-Type") != "application/json") {
 			served::response::stock_reply(400, res);
@@ -64,6 +63,33 @@ int main(int argc, char const* argv[]) {
 		}
 		res << req.url().fragment();
 	});
+
+	// POST /clientes
+    mux.handle("/clientes")
+        .post([&clientService](served::response & res, const served::request & req) {
+			if (req.header("Content-Type") != "application/json") {
+				served::response::stock_reply(400, res);
+				return;
+			}
+			auto reqBody = json::parse(req.body());
+			Client client;
+			client.clientId = reqBody["clientId"];
+			client.limit = reqBody["limit"];
+			client.balance = reqBody["balance"];
+			clientService.clientRepository.addClient(client);
+			served::response::stock_reply(200, res);
+		})
+		.get([&clientService](served::response & res, const served::request & req) {
+			json clients = json::array();
+			for (int i = 0; i < clientService.clientRepository.clients.size(); i++) {
+				json client = json::object();
+				client["clientId"] = clientService.clientRepository.clients[i].clientId;
+				client["limit"] = clientService.clientRepository.clients[i].limit;
+				client["balance"] = clientService.clientRepository.clients[i].balance;
+				clients.push_back(client);
+			}
+			res << clients.dump();
+		});
 
 	// Create the server and run with 10 handler threads.
 	served::net::server server("127.0.0.1", "8080", mux);
