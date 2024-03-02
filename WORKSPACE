@@ -56,9 +56,9 @@ cpp_repos()
 
 git_repository(
     name = "protobuf",
-    commit = "09745575a923640154bcf307fba8aedff47f240a",
+    commit = "7a51eb5370905dec1943c5f1f6b4381fecb04116",
     remote = "https://github.com/protocolbuffers/protobuf",
-    shallow_since = "1558721209 -0700",
+    # shallow_since = "1558721209 -0700",
 )
 
 load("@protobuf//:protobuf_deps.bzl", "protobuf_deps")

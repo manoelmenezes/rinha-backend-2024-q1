@@ -4,6 +4,7 @@
 #include "client_repository.h"
 #include <served/served.hpp>
 #include "proto/rinha.pb.h"
+// #include <protobuf/json_util.h>
 
 using std::cout;
 using std::endl;
@@ -47,7 +48,7 @@ int main(int argc, char const* argv[]) {
 	served::multiplexer mux;
 
     rinha::Balance balance;
-    
+
     // GET /clientes/[id]/extrato
 	mux.handle("/clients/{id}/extrato")
 		.get([](served::response & res, const served::request & req) {
