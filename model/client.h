@@ -1,6 +1,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 #include "transaction.h"
+#include <nlohmann/json.hpp>
+#include <string>
+
+using json = nlohmann::json;
 
 struct ExecuteTransactionResponse {
     signed limit = 0;
@@ -14,6 +18,8 @@ struct Client {
     void credit(signed value);
     void debit(signed value);
     void executeTransaction(Transaction& transaction, ExecuteTransactionResponse& response);
+    json toJson();
+    void fromJson(std::string jsonStr);
 };
 
 class InsufficientBalanceException: public std::logic_error {

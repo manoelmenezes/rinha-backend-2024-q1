@@ -20,7 +20,7 @@ gcc_register_toolchain(
     target_arch = ARCHS.x86_64,
 )
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 git_repository(
     name = "served",
     commit = "2eb36b83fa69330900ae58ef41d12b5f7abc138c",
@@ -39,4 +39,26 @@ git_repository(
     name = "nlohmann_json",
     commit = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03",
     remote = "https://github.com/nlohmann/json",
+)
+
+http_archive(
+    name = "rules_foreign_cc",
+    patch_args = ["-p1"],
+    # patches = [asphr_path + ":rules_foreign_cc.0.7.1.patch"],  # from https://github.com/bazelbuild/rules_foreign_cc/issues/859#issuecomment-1058361769
+    sha256 = "62e364a05370059f07313ec46ae4205af23deb00e41f786f3233a98098c7e636",
+    strip_prefix = "rules_foreign_cc-ae4ff42901354e2da8285dac4be8329eea2ea96a",
+    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/ae4ff42901354e2da8285dac4be8329eea2ea96a.tar.gz",  # v 0.7.1
+)
+
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+
+rules_foreign_cc_dependencies(
+    register_built_tools = True,
+)
+
+new_git_repository(
+    name = "libpqxx",
+    build_file = "//:libpqxx.BUILD",
+    commit = "9d2a459f76f52ea0df7b9b306b27fba84bb82e5f",
+    remote = "https://github.com/jtv/libpqxx",
 )

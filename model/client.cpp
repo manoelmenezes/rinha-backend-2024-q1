@@ -1,5 +1,9 @@
 #include "client.h"
 #include "transaction.h"
+#include <nlohmann/json.hpp>
+#include <string>
+
+using json = nlohmann::json;
 
 void Client::credit(signed value)
 {
@@ -28,4 +32,23 @@ void Client::executeTransaction(Transaction &transaction, ExecuteTransactionResp
     }
     response.balance = this->balance;
     response.limit = this->limit;
+}
+
+json Client::toJson()
+{
+    json client = json::object();
+    client["clientId"] = this->clientId;
+    client["limit"] = this->limit;
+    client["balance"] = this->balance;
+
+    return client;
+}
+
+void Client::fromJson(std::string jsonStr)
+{
+    // TODO(Manoel): add exception handling
+    auto jsonObj = json::parse(jsonStr);
+    this->clientId = jsonObj["clientId"];
+    this->limit = jsonObj["limit"];
+    this->balance = jsonObj["balance"];
 }
