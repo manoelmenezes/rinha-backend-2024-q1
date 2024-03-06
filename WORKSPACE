@@ -57,8 +57,21 @@ rules_foreign_cc_dependencies(
 )
 
 new_git_repository(
-    name = "libpqxx",
+    name = "pqxx",
     build_file = "//:libpqxx.BUILD",
     commit = "9d2a459f76f52ea0df7b9b306b27fba84bb82e5f",
     remote = "https://github.com/jtv/libpqxx",
 )
+
+#http_archive(
+#    name = "pqxx",
+#    url = "https://github.com/jtv/libpqxx/archive/refs/heads/master.zip",
+#    build_file = "//:libpqxx.BUILD",
+#    strip_prefix = "libpqxx-master",
+#)
+
+#load("//openssl:openssl_repositories.bzl", "openssl_repositories")
+#openssl_repositories()
+
+#load("//openssl:openssl_setup.bzl", "openssl_setup")
+#openssl_setup()

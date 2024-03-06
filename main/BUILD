@@ -9,6 +9,7 @@ cc_binary(
         "//model:client-service",
         "@served//:served",
         "@nlohmann_json//:json",
-        "@libpqxx",
+	"@pqxx",	
     ]
 )
+

@@ -4,12 +4,30 @@
 #include "model/client_repository.h"
 #include <served/served.hpp>
 #include <nlohmann/json.hpp>
+#include <pqxx/pqxx>
+
 using json = nlohmann::json;
 
 using std::cout;
 using std::endl;
 
 int main(int argc, char const* argv[]) {
+pqxx::connection c;
+            std::cout << "Connected to " << c.dbname() << '\n';
+
+            // Start a transaction.  A connection can only have one transaction
+            // open at the same time, but after you finish a transaction, you
+            // can start a new one on the same connection.
+            pqxx::work tx{c};
+
+            // Query data of two columns, converting them to std::string and
+            // int respectively.  Iterate the rows.
+            for (auto [id, bound, balance] : tx.query<int, int, int>(
+                "SELECT id, bound, balance FROM clients"))
+            {
+		std::cout << "Client id is " << id << ", limit is " << bound << " and balance is " << balance << ".\n";
+            }
+
 	ClientService clientService;
 	// Create a multiplexer for handling requests
 	served::multiplexer mux;
