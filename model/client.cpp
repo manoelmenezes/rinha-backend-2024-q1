@@ -52,3 +52,4 @@ void Client::fromJson(std::string jsonStr)
     this->limit = jsonObj["limit"];
     this->balance = jsonObj["balance"];
 }
+

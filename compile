@@ -1,5 +1,0 @@
-# Compile with gcc
-gcc -fdiagnostics-color=always -g -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -std=c++2a main.cpp client.cpp client_service.cpp client_repository.cpp -lstdc++ -o rinha
-
-# Compile with bazel
-../../bazelisk/bazelisk-linux-amd64 run //main:rinha --sandbox_add_mount_pair=/tmp

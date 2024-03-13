@@ -1,0 +1,1 @@
+. "/home/manoelmenezes/projects/rinha-backend-2024-q1/conanbuildenv-release-x86_64.sh"
