@@ -1,0 +1,10 @@
+[requires]
+cpprestsdk/2.10.19
+nlohmann_json/3.11.3
+libpqxx/7.9.0
+libpq/15.4
+pistache/0.0.5
+
+[generators]
+CMakeToolchain
+
